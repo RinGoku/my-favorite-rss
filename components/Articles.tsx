@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ArticleColumns from "./ArticleColumns";
+import { useQueries, useQuery } from "@tanstack/react-query";
 
 const urls = [
   "https://zenn.dev/topics/react/feed",
@@ -11,29 +12,25 @@ const urls = [
 ];
 
 const Articles = () => {
-  const [articles, setArticles] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const url = "https://zenn.dev/topics/zenn/feed";
-      const promises = urls.map(
-        (url) =>
-          new Promise(async (resolve) => {
-            const feed = await fetch(`/api/rss?url=${url}`);
-            const json = await feed.json();
-            resolve(json);
-          })
-      );
-      const feeds = await Promise.all(promises);
-      console.log(feeds);
-      setArticles(feeds as any);
-    })();
-  }, []);
+  const resultQueries = useQueries({
+    queries: urls.map((url) => ({
+      queryKey: ["user", url],
+      queryFn: () =>
+        new Promise(async (resolve) => {
+          const feed = await fetch(`/api/rss?url=${url}`);
+          const json = await feed.json();
+          resolve(json);
+        }),
+    })),
+  });
+  console.log(resultQueries);
+
   return (
     <div>
       <Content>
-        {articles.map((article, i) => (
+        {resultQueries.map((query, i) => (
           <ContentItem key={i}>
-            <ArticleColumns articles={article} />
+            <ArticleColumns articles={query.data} />
           </ContentItem>
         ))}
       </Content>
