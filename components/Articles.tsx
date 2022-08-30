@@ -25,7 +25,7 @@ const Articles = () => {
       );
       const feeds = await Promise.all(promises);
       console.log(feeds);
-      setArticles(feeds);
+      setArticles(feeds as any);
     })();
   }, []);
   return (

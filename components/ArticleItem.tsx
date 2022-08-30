@@ -8,8 +8,9 @@ import {
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { FC } from "react";
 
-export const ArticleItems = ({ article }) => {
+export const ArticleItems: FC<any> = ({ article }) => {
   return (
     <a href={article.link} rel="noopener noreferrer" target="_blank">
       <Center py={6}>
