@@ -9,7 +9,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function blogPostWithImage({ article }) {
+export const ArticleItems = ({ article }) => {
   return (
     <a href={article.link} rel="noopener noreferrer" target="_blank">
       <Center py={6}>
@@ -54,4 +54,6 @@ export default function blogPostWithImage({ article }) {
       </Center>
     </a>
   );
-}
+};
+
+export default ArticleItems;
