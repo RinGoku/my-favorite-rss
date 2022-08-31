@@ -32,7 +32,7 @@ export const ArticleItems: FC<any> = ({ article }) => {
             pos={"relative"}
           >
             {article.enclosure?.url && (
-              <Image src={article.enclosure.url} layout={"fill"} />
+              <Image src={article.enclosure.url} layout={"fill"} alt="" />
             )}
           </Box>
           <Stack>

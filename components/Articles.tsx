@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FC, memo, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ArticleColumns from "./ArticleColumns";
 import { useQueries, useQuery } from "@tanstack/react-query";
@@ -11,7 +11,8 @@ const urls = [
   "http://qiita.com/tags/typescript/feed.atom",
 ];
 
-const Articles = () => {
+// eslint-disable-next-line react/display-name
+const Articles: FC<unknown> = memo(() => {
   const resultQueries = useQueries({
     queries: urls.map((url) => ({
       queryKey: ["user", url],
@@ -36,7 +37,7 @@ const Articles = () => {
       </Content>
     </div>
   );
-};
+});
 
 const Content = styled.div`
   display: flex;

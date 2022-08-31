@@ -4,6 +4,9 @@ import styled from "@emotion/styled";
 import { FC } from "react";
 
 const ArticleColumns: FC<any> = ({ articles }) => {
+  if (!articles) {
+    return null;
+  }
   return (
     <section className="article-columns">
       <Heading as="h2" size="md">
